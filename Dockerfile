@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y libncurses5-dev
 
 # Add a new user 'ubuntu'
 # 添加新用户 'ubuntu'
-RUN useradd -m ubuntu
+RUN id -u ubuntu &>/dev/null || useradd -m ubuntu
 
 # Install sudo and curl, and grant sudo permissions to the user 'ubuntu'
 # 安装 sudo 和 curl，并给予 'ubuntu' 用户 sudo 权限
