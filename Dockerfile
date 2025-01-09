@@ -1,4 +1,4 @@
-# Please note that in line 167, you need to change the download link to the real download link of cellranger. 注意167行改链接
+# Please note that in line 176, you need to change the download link to the real download link of cellranger. 注意176行改链接
 
 # Use Ubuntu as the base image
 # 使用 Ubuntu 作为基础镜像
