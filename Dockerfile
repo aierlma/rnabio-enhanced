@@ -1,4 +1,4 @@
-# Please note that in line 176, you need to change the download link to the real download link of cellranger. 注意176行改链接
+# Please note that in line 178, you need to change the download link to the real download link of cellranger. 注意178行改链接
 
 # Use Ubuntu as the base image
 # 使用 Ubuntu 作为基础镜像
@@ -6,12 +6,14 @@ FROM ubuntu:latest
 
 # Install essential dependencies
 # 安装必要的依赖
-RUN apt-get update && apt-get install -y wget tar unzip make gcc g++ git cmake python3 python3-pip openjdk-17-jdk
+RUN apt-get update && apt-get install -y wget tar unzip make gcc g++ git cmake python3 python3-pip python3-venv python3-dev openjdk-17-jdk pipx
 
 # Install dependencies for samtools
 # 安装samtools的依赖
 RUN apt-get install -y autoconf automake make gcc perl zlib1g-dev libbz2-dev liblzma-dev libcurl4-gnutls-dev libssl-dev vim
 RUN apt-get update && apt-get install -y libncurses5-dev
+RUN pipx ensurepath
+ENV PATH="/root/.local/bin:$PATH"
 
 # Add a new user 'ubuntu'
 # 添加新用户 'ubuntu'
@@ -97,7 +99,7 @@ RUN cd ~/bin/ && \
     tar -xzvf gffcompare-0.12.6.Linux_x86_64.tar.gz
 
 # 安装htseq-count
-RUN pip install HTSeq
+RUN pipx install HTSeq
 
 # 安装TopHat
 RUN cd ~/bin/ && \
@@ -122,7 +124,7 @@ RUN cd ~/bin/ && \
     chmod a+x ./fastp
 
 # 安装MultiQC
-RUN pip install multiqc
+RUN pipx install multiqc
 
 # 安装Picard
 RUN cd ~/bin/ && \
@@ -145,7 +147,7 @@ RUN cd ~/bin/ && \
     make
 
 # 安装RSeQC
-RUN pip install RSeQC
+RUN pipx install RSeQC
 
 # 安装bedops
 RUN cd ~/bin/ && \
@@ -169,11 +171,11 @@ RUN cd ~/bin/ && \
     chmod a+x genePredToBed
 
 # 安装how_are_we_stranded_here
-RUN pip install how_are_we_stranded_here
+RUN pipx install how_are_we_stranded_here
 
 # 安装CellRanger
 RUN cd ~/bin/ && \
-    wget https://xxxxx/cellranger-7.2.0.tar.gz   # change to the real download link
+    wget https://xxxxxxxx/cellranger-7.2.0.tar.gz   # change to the real download link
 RUN cd ~/bin/ && \
     tar -xzf cellranger-7.2.0.tar.gz
 
@@ -232,3 +234,5 @@ USER ubuntu
 # Set the default command
 # 设置默认命令
 CMD ["/bin/bash"]
+
+
